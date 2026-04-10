@@ -5,7 +5,7 @@
 
 HTML, JavaScript and CSS work together to style a web page with the template of a HTML syntax
 
-![image]((./extras/Images_readme/DOM.jpg))
+![image]((./images/DOM.jpg))
 
 ## Storing Data
 
