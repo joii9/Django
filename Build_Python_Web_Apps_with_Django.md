@@ -96,14 +96,16 @@ from django.http import HttpResponse
 # Create your views here.
 def home(request):
   return HttpResponse("Welcome to the Vet's office!")
-
-The resulting templates folder structure will look like this:
 ```
 
+The resulting templates folder structure will look like this:
+
+````python
 myapp/
 └── templates/
     └── myapp/
       └── mytemplate.html
+````
 
 ## Creating a Django template
 
@@ -115,12 +117,13 @@ In HTML, we use curly braces like this:
 
 ```html
 <h1>Hello, {{name}}</h1>
+````
 
 When we call the view to render the template, we can use something called a context to tell Django what to replace in the template. The relationships in the context are referred to as a name/value pair. By default, a context is an empty dictionary. Our context for name will look like this inside the view function:
 
 ````python
 context = {"name": "Junior"}
-
+````
 
 We then pass the context as an argument in the render function. The full view.py will look like this:
 
@@ -131,7 +134,7 @@ def home(request):
   context = {"name": "Junior"}
   template = loader.get_template("app/home.html")
   return HttpResponse(template.render(context))
-
+````
 
 This would return a webpage that says “Hello, Junior” inside an <h1> tag.
 
@@ -145,7 +148,7 @@ from django.shortcuts import render
 def home(request):
   context = {"name": "Junior"}
   return render(request, "app/home.html", context)
-
+````
 
 Note that we no longer need to import loader and HttpResponse when we use the render() function. The render() function takes the request object as its first argument, a template name as its second argument, and a dictionary as an optional third argument that passes the context variables to the template.
 
@@ -163,24 +166,10 @@ urlpatterns = [
   path('', views.home),
   path('profile/', views.profile, name="profile")  
 ]
-
+````
 
 After the import statements is a list of patterns called urlpatterns, which contain the routes to each view function. Each route is provided as a path() object that has three arguments: the URL route as a 
 string, the name of the function of the view, and an optional name used to refer to the view.
 
 
 With the above example, when we navigate to the URL without any additional route, '', the home() view function will be called. Going to the URL ending with /profile will call the profile() view function.
-
-
-
-
-
-
-```python
-
-```
-
-
-```python
-
-```
