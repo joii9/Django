@@ -98,7 +98,7 @@ def home(request):
   return HttpResponse("Welcome to the Vet's office!")
 
 The resulting templates folder structure will look like this:
-
+```
 
 myapp/
 └── templates/
