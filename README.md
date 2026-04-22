@@ -714,7 +714,7 @@ class Gardener(models.Model):
   
   def __str__(self):
     return self.name
-
+````
 
 Methods always require the first 
 parameter
@@ -734,7 +734,7 @@ class Flower(models.Model):
 
   def can_grow(self):
     return self.has_sunlight and self.has_water
-
+````
 
 ---
 
@@ -746,29 +746,42 @@ class Gardener(models.Model):
     return f"I've studied flowers for {self.years_experience}. I believe this flower is {flower.name} and is found in {flower.native_env}." 
 ````
 
+## Migrations - makemigrations
+
+migrations are needed when we make changes to our models
+
+In Django, there are two steps necessary to make this migration happen:
+
+- Running **python3 manage.py makemigrations** to create a file with the instructions needed for our database to create the proper schemas. **In root folder.**
+- Running **python3 manage.py migrate** to execute the instructions in our file to create the actual tables in our database.
+
+If we just want to create the models of one app insted of all of them. We can use:
+
+**python3 manage.py makemigrations garden.**
+
+The files created from this step live in the migrations folder within our app directory. Our first migration file would begin with **0001_initial.py**. We can refer to our migrations using the starting numbers, in this case, it has a migration name of 0001.
+
+It’s important that every time we need to make a change to the schema in our database we need to do this makemigrations step! Subsequent migration files will increase the number at the beginning of the file. For example, the second migration will begin with 0002_xxxxx.py and so forth.
+
+If we need to reverse a migration, Django also makes this possible by specifying the migration we want to revert back to:
+
+**python3 manage.py migrate \<app_name> \<migration_name>**
 
 
+The \<migration_name> would be something like 0001 or 0002 etc., depending on which migration we are reverting back to. We can use the command showmigrations to see a list of all the migrations.
+
+**python3 manage.py showmigrations garden**
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- A schema is a structure we design for the data in our application.
+- A model is a Python class that contains characteristics and behavior using: attributes, metadata, and methods.
+- Model attributes are implemented using Django field names and different field types.
+- Django models can relate to other models. One way of showing this connection is to use a foreign key.
+- Django field types accept optional keyword arguments based on key-value pairs such as null, blank, choices, default, and primary_key.
+- Models can contain metadata using a nested Meta class and providing specific attributes.
+- Models can have methods that are functions specific to that model. Some methods are inherited from the parent Model class.
+- Django requires that we commit our models to the database via a two-step migration procedure with makemigrations and migrate.
+- Django lets us undo one or more migrations by supplying the migrate command with a named migration.
 
 
 
